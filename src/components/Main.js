@@ -3,17 +3,23 @@ import React, { Component } from 'react'
 class Main extends Component {
     constructor(props) {
         super(props)
-
+        this.getDataFromApi = this.getDataFromApi.bind(this)
         this.state = {
             rows: []
         }
     }
+    formatPrice(number) {
+        return number.toLocaleString("en-US", { style: 'currency', currency: 'USD', maximumSignificantDigits: 6 })
 
+    }
+    formatMarketcap(number) {
+        return number.toLocaleString("en-US", { style: 'currency', currency: 'USD' })
+    }
     createTable(coins) {
         this.setState({
             rows: coins.map(coin => {
-                return <tr key={coin.symbol}><td>{coin.symbol}</td><td>{coin.current_price}</td></tr>;
-            })
+                return <tr key={coin.symbol}><td>{coin.market_cap_rank}</td><td><img src={coin.image} alt={coin.name} height="32" width="32"></img> {coin.name}</td><td>{this.formatMarketcap(coin.market_cap)}</td><td>{this.formatPrice(coin.current_price)}</td></tr>;
+            }, setTimeout(this.getDataFromApi, 45000))
         })
     }
 
@@ -32,9 +38,8 @@ class Main extends Component {
         return (
             <div>
                 <table>
-                    <tbody>
-                        {this.state.rows}
-                    </tbody>
+                    <thead><tr><th>#</th><th>Coin</th><th>Market Cap</th><th>Price</th></tr></thead>
+                    <tbody>{this.state.rows}</tbody>
                 </table>
             </div>
         )
