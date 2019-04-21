@@ -15,10 +15,15 @@ class Main extends Component {
     formatMarketcap(number) {
         return number.toLocaleString("en-US", { style: 'currency', currency: 'USD' })
     }
+    formatCirc(supply, symbol){
+        const number = parseInt(supply)
+        const str = `${number.toLocaleString()} ${symbol.toUpperCase()}`
+        return str
+    }
     createTable(coins) {
         this.setState({
             rows: coins.map(coin => {
-                return <tr key={coin.symbol}><td>{coin.market_cap_rank}</td><td><img src={coin.image} alt={coin.name} height="32" width="32"></img> {coin.name}</td><td>{this.formatMarketcap(coin.market_cap)}</td><td>{this.formatPrice(coin.current_price)}</td></tr>;
+                return <tr key={coin.symbol}><td>{coin.market_cap_rank}</td><td><img src={coin.image} alt={coin.name} height="32" width="32"></img> {coin.name}</td><td>{this.formatMarketcap(coin.market_cap)}</td><td>{this.formatPrice(coin.current_price)}</td><td>{this.formatCirc(coin.circulating_supply, coin.symbol)} </td></tr>;
             }, setTimeout(this.getDataFromApi, 45000))
         })
     }
@@ -37,8 +42,8 @@ class Main extends Component {
     render() {
         return (
             <div>
-                <table>
-                    <thead><tr><th>#</th><th>Coin</th><th>Market Cap</th><th>Price</th></tr></thead>
+                <table className='table'>
+                    <thead><tr><th>#</th><th>Coin</th><th>Market Cap</th><th>Price</th><th>Circulating Supply</th></tr></thead>
                     <tbody>{this.state.rows}</tbody>
                 </table>
             </div>
