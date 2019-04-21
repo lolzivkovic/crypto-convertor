@@ -1,23 +1,36 @@
 import React, { Component } from 'react'
+import SelectOption from './SelectOption';
 
 class Convertor extends Component {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
+    this.handleFiatChange = this.handleFiatChange.bind(this)
+
     this.state = {
-      value: 'bitcoin'
+      coinValue: 'bitcoin',
+      fiatValue: 'usd'
     }
   }
   updateInput(data) {
-    const displayPrice = document.getElementById('displayPrice')
-    const price = data.market_data.current_price.usd.toLocaleString()
-    displayPrice.value = price
+    const displayPrice = document.getElementById('coinPrice')
+    if (this.state.fiatValue === 'usd') {
+      const price = data.market_data.current_price.usd.toLocaleString("en-US", { style: 'currency', currency: 'USD' })
+      displayPrice.value = price
+    } else if(this.state.fiatValue === 'eur'){
+      const price = data.market_data.current_price.eur.toLocaleString("en-US", { style: 'currency', currency: 'EUR' })
+      displayPrice.value = price
+    }
+  }
+
+  handleFiatChange(event) {
+    this.setState({ fiatValue: event.target.value }, () => this.getApiData())
   }
   handleChange(event) {
-    this.setState({ value: event.target.value }, () => this.getApiData());
+    this.setState({ coinValue: event.target.value }, () => this.getApiData())
   }
   getApiData() {
-    const url = `https://api.coingecko.com/api/v3/coins/${this.state.value}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
+    const url = `https://api.coingecko.com/api/v3/coins/${this.state.coinValue}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
     fetch(url).then(response => response.json()).then(data => this.updateInput(data))
   }
   componentDidMount() {
@@ -26,11 +39,7 @@ class Convertor extends Component {
   render() {
     return (
       <div>
-        <select value={this.state.value} onChange={this.handleChange}>
-          <option value='bitcoin'>BTC</option>
-          <option value='ethereum'>ETH</option>
-        </select>
-        <input id='displayPrice' type='text'></input>
+        <SelectOption coinValue={this.state.coinValue} fiatValue={this.state.fiatValue} handleChange={this.handleChange} handleFiatChange={this.handleFiatChange}></SelectOption>
       </div>
     )
   }
