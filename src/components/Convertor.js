@@ -7,6 +7,7 @@ class Convertor extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleFiatChange = this.handleFiatChange.bind(this)
     this.ChangePrice = this.ChangePrice.bind(this)
+    this.ChangeVolume = this.ChangeVolume.bind(this)
 
     this.state = {
       coinValue: 'bitcoin',
@@ -18,10 +19,10 @@ class Convertor extends Component {
     const displayPrice = document.getElementById('coinPrice')
     this.setState({ data: data })
     if (this.state.fiatValue === 'usd') {
-      const price = data.market_data.current_price.usd.toLocaleString("en-US", { style: 'currency', currency: 'USD' })
+      const price = data.market_data.current_price.usd.toLocaleString()
       displayPrice.value = price
     } else if (this.state.fiatValue === 'eur') {
-      const price = data.market_data.current_price.eur.toLocaleString("en-US", { style: 'currency', currency: 'EUR' })
+      const price = data.market_data.current_price.eur.toLocaleString()
       displayPrice.value = price
     }
   }
@@ -42,20 +43,58 @@ class Convertor extends Component {
   ChangePrice() {
     const displayPrice = document.getElementById('coinPrice')
     const coinVolume = document.getElementById('coinVolume')
+
     if (this.state.fiatValue === 'usd') {
-      const price = parseInt(this.state.data.market_data.current_price.usd) * coinVolume.value
-      // .toLocaleString("en-US", { style: 'currency', currency: 'USD' })
-      displayPrice.value = price.toLocaleString("en-US", { style: 'currency', currency: 'USD' })
+
+      if (coinVolume.value === '') {
+        displayPrice.value = this.state.data.market_data.current_price.usd.toLocaleString()
+      } else {
+
+        const price = parseInt(this.state.data.market_data.current_price.usd) * coinVolume.value
+        // .toLocaleString("en-US", { style: 'currency', currency: 'USD' })
+        displayPrice.value = price.toLocaleString()
+      }
     } else if (this.state.fiatValue === 'eur') {
-      const price = parseInt(this.state.data.market_data.current_price.eur) * coinVolume.value
-      // .toLocaleString("en-US", { style: 'currency', currency: 'EUR' })
-      displayPrice.value = price.toLocaleString("en-US", { style: 'currency', currency: 'EUR' })
+
+      if (coinVolume.value === '') {
+
+        displayPrice.value = this.state.data.market_data.current_price.eur.toLocaleString()
+      } else {
+
+        const price = parseInt(this.state.data.market_data.current_price.eur) * coinVolume.value
+        // .toLocaleString("en-US", { style: 'currency', currency: 'EUR' })
+        displayPrice.value = price.toLocaleString()
+      }
+    }
+  }
+
+  ChangeVolume() {
+    const displayPrice = document.getElementById('coinPrice')
+    const coinVolume = document.getElementById('coinVolume')
+
+    if (this.state.fiatValue === 'usd') {
+      const num = displayPrice.value.replace(/\D/g, '')
+      const volume = parseInt(num) / this.state.data.market_data.current_price.usd
+
+      coinVolume.value = volume.toPrecision(6)
+    } else if (this.state.fiatValue === 'eur') {
+      const num = displayPrice.value.replace(/\D/g, '')
+      const volume = parseInt(num) / this.state.data.market_data.current_price.eur
+
+      coinVolume.value = volume.toPrecision(6)
     }
   }
   render() {
     return (
       <div>
-        <SelectOption coinValue={this.state.coinValue} fiatValue={this.state.fiatValue} handleChange={this.handleChange} handleFiatChange={this.handleFiatChange} ChangePrice={this.ChangePrice}></SelectOption>
+        <SelectOption
+          coinValue={this.state.coinValue}
+          fiatValue={this.state.fiatValue}
+          handleChange={this.handleChange}
+          handleFiatChange={this.handleFiatChange}
+          ChangePrice={this.ChangePrice}
+          ChangeVolume={this.ChangeVolume}>
+        </SelectOption>
       </div>
     )
   }

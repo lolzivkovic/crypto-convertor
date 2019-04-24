@@ -1,7 +1,7 @@
 import React from 'react'
 
-function SelectOption({ coinValue, fiatValue, handleChange, handleFiatChange,  ChangePrice }) {
-    
+function SelectOption({ coinValue, fiatValue, handleChange, handleFiatChange, ChangePrice, ChangeVolume }) {
+
     return (
         <div className='my-3 d-flex justify-content-sm-center'>
             <form className='form-inline'>
@@ -20,7 +20,7 @@ function SelectOption({ coinValue, fiatValue, handleChange, handleFiatChange,  C
                 </select>
 
                 <input className='form-control' id='coinVolume' type='text' onKeyUp={ChangePrice}></input>
-                <input className='form-control' id='coinPrice' type='text'></input>
+                <input className='form-control' id='coinPrice' type='text' onKeyUp={ChangeVolume}></input>
 
                 <select value={fiatValue} onChange={handleFiatChange} className='form-control'>
                     <option value='usd'>USD</option>
