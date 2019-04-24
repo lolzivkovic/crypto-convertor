@@ -23,8 +23,8 @@ class Main extends Component {
     createTable(coins) {
         this.setState({
             rows: coins.map(coin => {
-                return <tr key={coin.symbol}><td>{coin.market_cap_rank}</td><td><img src={coin.image} alt={coin.name} height="32" width="32"></img> {coin.name}</td><td>{this.formatMarketcap(coin.market_cap)}</td><td>{this.formatPrice(coin.current_price)}</td><td>{this.formatCirc(coin.circulating_supply, coin.symbol)} </td></tr>;
-            }, setTimeout(this.getDataFromApi, 45000))
+                return <tr key={coin.symbol}><td>{coin.market_cap_rank}</td><td><img src={coin.image} alt={coin.name} height="32" width="32"></img> {coin.name}</td><td>{this.formatMarketcap(coin.market_cap)}</td><td>{this.formatPrice(coin.current_price)}</td><td>{this.formatCirc(coin.circulating_supply, coin.symbol)} </td></tr>
+            }, setTimeout(this.getDataFromApi, 40000))
         })
     }
 

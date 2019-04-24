@@ -6,18 +6,21 @@ class Convertor extends Component {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleFiatChange = this.handleFiatChange.bind(this)
+    this.ChangePrice = this.ChangePrice.bind(this)
 
     this.state = {
       coinValue: 'bitcoin',
-      fiatValue: 'usd'
+      fiatValue: 'usd',
+      data: []
     }
   }
   updateInput(data) {
     const displayPrice = document.getElementById('coinPrice')
+    this.setState({ data: data })
     if (this.state.fiatValue === 'usd') {
       const price = data.market_data.current_price.usd.toLocaleString("en-US", { style: 'currency', currency: 'USD' })
       displayPrice.value = price
-    } else if(this.state.fiatValue === 'eur'){
+    } else if (this.state.fiatValue === 'eur') {
       const price = data.market_data.current_price.eur.toLocaleString("en-US", { style: 'currency', currency: 'EUR' })
       displayPrice.value = price
     }
@@ -36,10 +39,23 @@ class Convertor extends Component {
   componentDidMount() {
     this.getApiData()
   }
+  ChangePrice() {
+    const displayPrice = document.getElementById('coinPrice')
+    const coinVolume = document.getElementById('coinVolume')
+    if (this.state.fiatValue === 'usd') {
+      const price = parseInt(this.state.data.market_data.current_price.usd) * coinVolume.value
+      // .toLocaleString("en-US", { style: 'currency', currency: 'USD' })
+      displayPrice.value = price.toLocaleString("en-US", { style: 'currency', currency: 'USD' })
+    } else if (this.state.fiatValue === 'eur') {
+      const price = parseInt(this.state.data.market_data.current_price.eur) * coinVolume.value
+      // .toLocaleString("en-US", { style: 'currency', currency: 'EUR' })
+      displayPrice.value = price.toLocaleString("en-US", { style: 'currency', currency: 'EUR' })
+    }
+  }
   render() {
     return (
       <div>
-        <SelectOption coinValue={this.state.coinValue} fiatValue={this.state.fiatValue} handleChange={this.handleChange} handleFiatChange={this.handleFiatChange}></SelectOption>
+        <SelectOption coinValue={this.state.coinValue} fiatValue={this.state.fiatValue} handleChange={this.handleChange} handleFiatChange={this.handleFiatChange} ChangePrice={this.ChangePrice}></SelectOption>
       </div>
     )
   }
