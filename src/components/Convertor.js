@@ -82,13 +82,14 @@ class Convertor extends Component {
     const coinVolume = document.getElementById('coinVolume')
 
     if (this.state.fiatValue === 'usd') {
-      const num = displayPrice.value
+
+      const num = displayPrice.value.replace(/\D/g, '')
       const volume = parseInt(num) / this.state.data.market_data.current_price.usd
       coinVolume.value = volume.toPrecision(8)
 
     } else if (this.state.fiatValue === 'eur') {
 
-      const num = displayPrice.value
+      const num = displayPrice.value.replace(/\D/g, '')
       const volume = parseInt(num) / this.state.data.market_data.current_price.eur
       coinVolume.value = volume.toPrecision(8)
 
