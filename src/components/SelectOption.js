@@ -20,6 +20,7 @@ function SelectOption({ coinValue, fiatValue, handleChange, handleFiatChange, Ch
                 </select>
 
                 <input className='form-control' id='coinVolume' type='text' onKeyUp={ChangePrice}></input>
+                <span>&#61;</span>
                 <input className='form-control' id='coinPrice' type='text' onKeyUp={ChangeVolume}></input>
 
                 <select value={fiatValue} onChange={handleFiatChange} className='form-control'>

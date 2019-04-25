@@ -8,6 +8,7 @@ class Convertor extends Component {
     this.handleFiatChange = this.handleFiatChange.bind(this)
     this.ChangePrice = this.ChangePrice.bind(this)
     this.ChangeVolume = this.ChangeVolume.bind(this)
+    this.getApiData = this.getApiData.bind(this)
 
     this.state = {
       coinValue: 'bitcoin',
@@ -17,13 +18,25 @@ class Convertor extends Component {
   }
   updateInput(data) {
     const displayPrice = document.getElementById('coinPrice')
+    const coinVolume = document.getElementById('coinVolume')
     this.setState({ data: data })
+    setTimeout(this.getApiData, 40000);
     if (this.state.fiatValue === 'usd') {
-      const price = data.market_data.current_price.usd.toLocaleString("en-US", { minimumSignificantDigits: 6 })
-      displayPrice.value = price
+      if (coinVolume.value === '') {
+        const price = data.market_data.current_price.usd.toLocaleString("en-US", { minimumSignificantDigits: 6 })
+        displayPrice.value = price
+      } else {
+        const price = data.market_data.current_price.usd * coinVolume.value
+        displayPrice.value = price.toLocaleString("en-US", { minimumSignificantDigits: 6 })
+      }
     } else if (this.state.fiatValue === 'eur') {
-      const price = data.market_data.current_price.eur.toLocaleString("en-US", { minimumSignificantDigits: 6 })
-      displayPrice.value = price
+      if (coinVolume.value === '') {
+        const price = data.market_data.current_price.eur.toLocaleString("en-US", { minimumSignificantDigits: 6 })
+        displayPrice.value = price
+      } else {
+        const price = data.market_data.current_price.eur * coinVolume.value
+        displayPrice.value = price.toLocaleString("en-US", { minimumSignificantDigits: 6 })
+      }
     }
   }
 
