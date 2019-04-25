@@ -19,10 +19,10 @@ class Convertor extends Component {
     const displayPrice = document.getElementById('coinPrice')
     this.setState({ data: data })
     if (this.state.fiatValue === 'usd') {
-      const price = data.market_data.current_price.usd.toLocaleString()
+      const price = data.market_data.current_price.usd.toLocaleString("en-US", { minimumSignificantDigits: 6 })
       displayPrice.value = price
     } else if (this.state.fiatValue === 'eur') {
-      const price = data.market_data.current_price.eur.toLocaleString()
+      const price = data.market_data.current_price.eur.toLocaleString("en-US", { minimumSignificantDigits: 6 })
       displayPrice.value = price
     }
   }
@@ -45,25 +45,21 @@ class Convertor extends Component {
     const coinVolume = document.getElementById('coinVolume')
 
     if (this.state.fiatValue === 'usd') {
-
       if (coinVolume.value === '') {
-        displayPrice.value = this.state.data.market_data.current_price.usd.toLocaleString()
+        displayPrice.value = this.state.data.market_data.current_price.usd.toLocaleString("en-US", { minimumSignificantDigits: 6 })
       } else {
 
-        const price = parseInt(this.state.data.market_data.current_price.usd) * coinVolume.value
-        // .toLocaleString("en-US", { style: 'currency', currency: 'USD' })
-        displayPrice.value = price.toLocaleString()
+        const price = this.state.data.market_data.current_price.usd * coinVolume.value
+        displayPrice.value = price.toLocaleString("en-US", { minimumSignificantDigits: 6 })
       }
     } else if (this.state.fiatValue === 'eur') {
-
       if (coinVolume.value === '') {
 
-        displayPrice.value = this.state.data.market_data.current_price.eur.toLocaleString()
+        displayPrice.value = this.state.data.market_data.current_price.eur.toLocaleString("en-US", { minimumSignificantDigits: 6 })
       } else {
 
-        const price = parseInt(this.state.data.market_data.current_price.eur) * coinVolume.value
-        // .toLocaleString("en-US", { style: 'currency', currency: 'EUR' })
-        displayPrice.value = price.toLocaleString()
+        const price = this.state.data.market_data.current_price.eur * coinVolume.value
+        displayPrice.value = price.toLocaleString("en-US", { minimumSignificantDigits: 6 })
       }
     }
   }
@@ -73,15 +69,16 @@ class Convertor extends Component {
     const coinVolume = document.getElementById('coinVolume')
 
     if (this.state.fiatValue === 'usd') {
-      const num = displayPrice.value.replace(/\D/g, '')
+      const num = displayPrice.value
       const volume = parseInt(num) / this.state.data.market_data.current_price.usd
+      coinVolume.value = volume.toPrecision(8)
 
-      coinVolume.value = volume.toPrecision(6)
     } else if (this.state.fiatValue === 'eur') {
-      const num = displayPrice.value.replace(/\D/g, '')
-      const volume = parseInt(num) / this.state.data.market_data.current_price.eur
 
-      coinVolume.value = volume.toPrecision(6)
+      const num = displayPrice.value
+      const volume = parseInt(num) / this.state.data.market_data.current_price.eur
+      coinVolume.value = volume.toPrecision(8)
+
     }
   }
   render() {

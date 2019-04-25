@@ -13,9 +13,9 @@ class Main extends Component {
 
     }
     formatMarketcap(number) {
-        return number.toLocaleString("en-US", { style: 'currency', currency: 'USD' })
+        return number.toLocaleString("en-US", { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 })
     }
-    formatCirc(supply, symbol){
+    formatCirc(supply, symbol) {
         const number = parseInt(supply)
         const str = `${number.toLocaleString()} ${symbol.toUpperCase()}`
         return str
