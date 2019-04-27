@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SelectOption from './SelectOption';
+import SelectOption from './SelectOption'
 
 class Convertor extends Component {
   constructor(props) {
@@ -19,8 +19,10 @@ class Convertor extends Component {
   updateInput(data) {
     const displayPrice = document.getElementById('coinPrice')
     const coinVolume = document.getElementById('coinVolume')
+
     this.setState({ data: data })
     setTimeout(this.getApiData, 40000);
+
     if (this.state.fiatValue === 'usd') {
       if (coinVolume.value === '') {
         const price = data.market_data.current_price.usd.toLocaleString("en-US", { minimumSignificantDigits: 6 })

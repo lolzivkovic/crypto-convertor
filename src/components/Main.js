@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import '../index.css'
 
 class Main extends Component {
     constructor(props) {
@@ -20,10 +21,17 @@ class Main extends Component {
         const str = `${number.toLocaleString()} ${symbol.toUpperCase()}`
         return str
     }
+    PercChange(percent){
+        if(Math.sign(percent) === 1 || Math.sign(percent) === 0){
+            return <td className='positiveValue'>{percent.toFixed(2)} &#37;</td>
+        } else {
+            return <td className='negativeValue'>{percent.toFixed(2)} &#37;</td>
+        }
+    }
     createTable(coins) {
         this.setState({
             rows: coins.map(coin => {
-                return <tr key={coin.symbol}><td>{coin.market_cap_rank}</td><td><img src={coin.image} alt={coin.name} height="32" width="32"></img> {coin.name}</td><td>{this.formatMarketcap(coin.market_cap)}</td><td>{this.formatPrice(coin.current_price)}</td><td>{this.formatCirc(coin.circulating_supply, coin.symbol)} </td></tr>
+                return <tr key={coin.symbol}><td>{coin.market_cap_rank}</td><td className='text-left'><img src={coin.image} alt={coin.name} height="32" width="32"></img> {coin.name}</td><td>{this.formatMarketcap(coin.market_cap)}</td><td>{this.formatPrice(coin.current_price)}</td><td>{this.formatCirc(coin.circulating_supply, coin.symbol)}</td>{this.PercChange(coin.price_change_percentage_24h)}</tr>
             }, setTimeout(this.getDataFromApi, 40000))
         })
     }
@@ -42,8 +50,8 @@ class Main extends Component {
     render() {
         return (
             <div>
-                <table className='table'>
-                    <thead><tr><th>#</th><th>Coin</th><th>Market Cap</th><th>Price</th><th>Circulating Supply</th></tr></thead>
+                <table className='table table-hover text-center'>
+                    <thead><tr><th>#</th><th>Coin</th><th>Market Cap</th><th>Price</th><th>Circulating Supply</th><th>Change (24h)</th></tr></thead>
                     <tbody>{this.state.rows}</tbody>
                 </table>
             </div>
