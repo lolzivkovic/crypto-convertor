@@ -11,7 +11,7 @@ class Main extends Component {
 
         this.state = {
             data: [],
-            currentCoin: 'bitcoin',
+            currentCoin: '',
             rows: [],
             show: false
         }
