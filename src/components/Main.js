@@ -10,15 +10,19 @@ class Main extends Component {
         this.hideModal = this.hideModal.bind(this)
 
         this.state = {
-            data: [],
-            currentCoin: '',
+            data: {},
+            currentCoin: 'bitcoin',
             rows: [],
             show: false
         }
     }
 
     showModal(symbol) {
-        this.setState({ show: true, currentCoin: symbol })
+        const url = `https://api.coingecko.com/api/v3/coins/${symbol}?localization=false&sparkline=true`
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => this.setState({ data: data, show: true }))
     }
     hideModal() {
         this.setState({ show: false })
@@ -44,9 +48,8 @@ class Main extends Component {
     }
     createTable(coins) {
         this.setState({
-            data: coins,
             rows: coins.map(coin => {
-                return <tr key={coin.symbol} className='tRows coinClick' onClick={() => this.showModal(coin.id)}><td>{coin.market_cap_rank}</td><td className='text-left'><img src={coin.image} alt={coin.name} height="32" width="32"></img> {coin.name}</td><td>{this.formatMarketcap(coin.market_cap)}</td><td>{this.formatPrice(coin.current_price)}</td><td>{this.formatCirc(coin.circulating_supply, coin.symbol)}</td>{this.percChange(coin.price_change_percentage_24h)}</tr>
+                return <tr key={coin.symbol} className='tRows coinClick' onClick={() => this.showModal(coin.id)}><td>{coin.market_cap_rank}</td><td><img src={coin.image} alt={coin.name} height="32" width="32"></img> {coin.name}</td><td>{this.formatMarketcap(coin.market_cap)}</td><td>{this.formatPrice(coin.current_price)}</td><td>{this.formatCirc(coin.circulating_supply, coin.symbol)}</td>{this.percChange(coin.price_change_percentage_24h)}</tr>
             }, setTimeout(this.getDataFromApi, 40000))
         })
     }
@@ -65,7 +68,7 @@ class Main extends Component {
     render() {
         return (
             <div>
-                <table className='table text-center'>
+                <table className='table text-justify'>
                     <thead><tr><th>#</th><th>Coin</th><th>Market Cap</th><th>Price</th><th>Circulating Supply</th><th>Change (24h)</th></tr></thead>
                     <tbody>{this.state.rows}</tbody>
                 </table>
