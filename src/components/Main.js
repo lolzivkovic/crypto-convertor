@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import '../index.css'
 import CoinModal from './CoinModal';
+import CoinTable from './CoinTable';
 
 class Main extends Component {
     constructor(props) {
         super(props)
         this.getDataFromApi = this.getDataFromApi.bind(this)
-        // this.showModal = this.showModal.bind(this)
+        this.showModal = this.showModal.bind(this)
         this.hideModal = this.hideModal.bind(this)
 
         this.state = {
@@ -27,30 +28,9 @@ class Main extends Component {
     hideModal() {
         this.setState({ show: false })
     }
-    formatPrice(number) {
-        return number.toLocaleString("en-US", { style: 'currency', currency: 'USD', maximumSignificantDigits: 6 })
-
-    }
-    formatMarketcap(number) {
-        return number.toLocaleString("en-US", { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 })
-    }
-    formatCirc(supply, symbol) {
-        const number = parseInt(supply)
-        const str = `${number.toLocaleString()} ${symbol.toUpperCase()}`
-        return str
-    }
-    percChange(percent) {
-        if (Math.sign(percent) === 1 || Math.sign(percent) === 0) {
-            return <td className='positiveValue'>{percent.toFixed(2)} &#37;</td>
-        } else {
-            return <td className='negativeValue'>{percent.toFixed(2)} &#37;</td>
-        }
-    }
     createTable(coins) {
         this.setState({
-            rows: coins.map(coin => {
-                return <tr key={coin.symbol} className='tRows coinClick' onClick={() => this.showModal(coin.id)}><td>{coin.market_cap_rank}</td><td><img src={coin.image} alt={coin.name} height="32" width="32"></img> {coin.name}</td><td>{this.formatMarketcap(coin.market_cap)}</td><td>{this.formatPrice(coin.current_price)}</td><td>{this.formatCirc(coin.circulating_supply, coin.symbol)}</td>{this.percChange(coin.price_change_percentage_24h)}</tr>
-            }, setTimeout(this.getDataFromApi, 40000))
+            rows: coins.map(coin => {return <CoinTable coin={coin} showModal={this.showModal}/>}, setTimeout(this.getDataFromApi, 40000))
         })
     }
 
