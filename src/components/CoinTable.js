@@ -32,7 +32,7 @@ class CoinTable extends Component {
     }
     render() {
         return (
-            <tr className='tRows coinClick' onClick={() => this.props.showModal(this.props.coin.id)}>
+            <tr className='tRows' onClick={() => this.props.showModal(this.props.coin.id)}>
                 <td className='col-auto'>{this.props.coin.market_cap_rank}</td>
                 <td className='col-auto'><img src={this.props.coin.image} alt={this.props.coin.name} height="32" width="32"></img> {this.props.coin.name}</td>
                 <td className='col-auto'>{this.formatMarketcap(this.props.coin.market_cap)}</td>

@@ -12,26 +12,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
 .positiveValue {
   color: green;
 }
+
 .negativeValue {
   color:red;
 }
+
 .tRows:hover{
-  background: rgba(0, 0, 0, 0.1)
-}
-.coinClick:hover{
+  background: rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
-.display-block {
-  display: block;
-}
-
-.display-none {
-  display: none;
-}
-/*----------------------------*/
+/*------------MODAL STYLE----------------*/
 .modal {
   position: fixed;
   top: 0;
@@ -42,11 +36,8 @@ code {
 }
 
 .modal-main {
-  position:fixed;
   background: white;
-  width: 80%;
-  height: auto;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+}
+.modalCurrentPrice {
+  color:green;
 }
