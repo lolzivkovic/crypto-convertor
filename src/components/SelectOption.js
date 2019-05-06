@@ -3,9 +3,8 @@ import React from 'react'
 function SelectOption({ coinValue, fiatValue, handleChange, handleFiatChange, ChangePrice, ChangeVolume }) {
 
     return (
-        <div className='my-3 d-flex justify-content-sm-center'>
-            <form className='form-inline'>
-
+        <div className='my-3 d-flex flex-wrap justify-content-center'>
+            <div className='d-flex align-items-center'>
                 <select className='form-control' value={coinValue} onChange={handleChange}>
                     <option value='bitcoin'>BTC</option>
                     <option value='ethereum'>ETH</option>
@@ -20,7 +19,7 @@ function SelectOption({ coinValue, fiatValue, handleChange, handleFiatChange, Ch
                 </select>
 
                 <input className='form-control' id='coinVolume' type='text' onKeyUp={ChangePrice}></input>
-                <span><img src='images/retweet-solid.svg' alt='Exchange Icon' width='20' height='20'></img></span>
+                <span className=''><img src='images/retweet-solid.svg' alt='Exchange Icon' width='20' height='20'></img></span>
                 <input className='form-control' id='coinPrice' type='text' onKeyUp={ChangeVolume}></input>
 
                 <select value={fiatValue} onChange={handleFiatChange} className='form-control'>
@@ -28,8 +27,7 @@ function SelectOption({ coinValue, fiatValue, handleChange, handleFiatChange, Ch
                     <option value='eur'>EUR</option>
                     {/* <option value='rsd'>RSD</option> */}
                 </select>
-
-            </form>
+            </div>
         </div>
     )
 }

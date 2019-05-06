@@ -38,14 +38,14 @@ class CoinModal extends Component {
                 <div className={showHideClass}>
                     <section className="modal-main container">
                         <div className='row'>
-                            <div className='d-flex align-items-start'>
+                            <div className='col-3'>
                                 <img className='logoCoin' src={data.image.large} alt={data.name} width='64' height='64'></img>
-                                <div >
+                                <div>
                                     <h2>{data.name}</h2>
                                     <span className='modalCoinSymbol'><h5>{data.symbol.toUpperCase()}</h5></span>
                                 </div>
                             </div>
-                            <div className='col'>
+                            <div className='col-9'>
                                 <table className='table'>
                                     <thead>
                                         <tr><td>1h</td><td>24h</td><td>Week</td><td>Month</td><td>Year</td></tr>
@@ -61,6 +61,9 @@ class CoinModal extends Component {
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        <div className='row'>
+
                         </div>
                         <button onClick={this.props.hideModal}>close</button>
                     </section>

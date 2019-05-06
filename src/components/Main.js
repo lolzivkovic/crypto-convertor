@@ -30,7 +30,7 @@ class Main extends Component {
     }
     createTable(coins) {
         this.setState({
-            rows: coins.map(coin => {return <CoinTable coin={coin} showModal={this.showModal}/>}, setTimeout(this.getDataFromApi, 40000))
+            rows: coins.map(coin => {return <CoinTable key={coin.symbol} coin={coin} showModal={this.showModal}/>}, setTimeout(this.getDataFromApi, 40000))
         })
     }
 
