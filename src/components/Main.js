@@ -30,7 +30,7 @@ class Main extends Component {
     }
     createTable(coins) {
         this.setState({
-            rows: coins.map(coin => {return <CoinTable key={coin.symbol} coin={coin} showModal={this.showModal}/>}, setTimeout(this.getDataFromApi, 40000))
+            rows: coins.map(coin => { return <CoinTable key={coin.symbol} coin={coin} showModal={this.showModal} /> }, setTimeout(this.getDataFromApi, 40000))
         })
     }
 
@@ -47,9 +47,18 @@ class Main extends Component {
 
     render() {
         return (
-            <div>
-                <table className='table text-justify'>
-                    <thead><tr><th>#</th><th>Coin</th><th>Market Cap</th><th>Price</th><th>Circulating Supply</th><th>Change (24h)</th></tr></thead>
+            <div className='table-responsive'>
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th className='col-auto'>#</th>
+                            <th className='col-auto'>Coin</th>
+                            <th className='col-auto'>Market Cap</th>
+                            <th className='col-auto'>Price</th>
+                            <th className='col-auto'>Circulating Supply</th>
+                            <th className='col-auto'>Change (24h)</th>
+                        </tr>
+                    </thead>
                     <tbody>{this.state.rows}</tbody>
                 </table>
                 <CoinModal show={this.state.show} hideModal={this.hideModal} currentCoin={this.state.currentCoin} data={this.state.data} />
