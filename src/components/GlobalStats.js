@@ -31,7 +31,7 @@ export class GlobalStats extends Component {
     }
     formatPerc(perc){
         const value = parseInt(perc)
-        return value.toFixed(1)
+        return `${value.toFixed(1)} %`
     }
     render() {
         const activeCrypto = this.state.globalStats.data.active_cryptocurrencies

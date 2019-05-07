@@ -24,7 +24,7 @@ class CoinModal extends Component {
     formatWebsite(website) {
         const re = /^(?:https?:\/\/)?(?:www\.)?/i;
         const websites = website.filter(e => e !== '').map((e, i) => {
-            return <p key={i}><a href={e}>{e.replace(re, '').split('/')[0]}</a></p>
+            return <p key={i}><a href={e} target='_blank' rel="noopener noreferrer">{e.replace(re, '').split('/')[0]}</a></p>
         })
         return websites
     }
