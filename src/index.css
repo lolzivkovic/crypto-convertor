@@ -27,9 +27,6 @@ code {
 }
 /*------------MODAL STYLE----------------*/
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
   width:100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
@@ -37,9 +34,21 @@ code {
 
 .modal-main {
   background: white;
+  height: 80%;
 }
 .priceChange p{
   margin-bottom: 0.25rem;
+}
+.modalWebsite {
+  max-height: 50%
+}
+.modalWebsite p {
+  padding:0;
+}
+.modalDesc {
+  max-height:50%;
+  overflow: auto;
+  text-overflow: clip;
 }
 
 /* Small devices (landscape phones, 576px and up) */
