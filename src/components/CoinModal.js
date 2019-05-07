@@ -2,14 +2,7 @@ import React, { Component } from 'react'
 import ReactHtmlParser from 'react-html-parser'
 
 class CoinModal extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-
-        }
-    }
-
+    
     formatPerc(percent) {
         if (!isNaN(percent)) {
             if (Math.sign(percent) === 1 || Math.sign(percent) === 0) {

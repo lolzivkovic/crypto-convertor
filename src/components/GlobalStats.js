@@ -15,7 +15,7 @@ export class GlobalStats extends Component {
         }
     }
     updateStats(global) {
-        this.setState({globalStats: global}, () => console.log(this.state.globalStats))
+        this.setState({globalStats: global})
     }
     getGlobalData() {
         const url = 'https://api.coingecko.com/api/v3/global'
@@ -40,7 +40,7 @@ export class GlobalStats extends Component {
         const btcDominance = this.state.globalStats.data.market_cap_percentage.btc
 
         return (
-            <div className='row'>
+            <div className='row globalCrypto'>
                 <span className='globalStats col-12 col-sm-6 col-md-3'>Cryptocurrencies: <span className='globalValues'>{activeCrypto}</span></span>
                 <span className='globalStats col-12 col-sm-6 col-md-3'>Market Cap: <span className='globalValues'>{this.formatCap(totalMarketCap)}</span></span>
                 <span className='globalStats col-12 col-sm-6 col-md-3'>Total Volume: <span className='globalValues'>{this.formatCap(totalVolume)}</span></span>

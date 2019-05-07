@@ -3,14 +3,6 @@ import React, { Component } from 'react'
 
 class CoinTable extends Component {
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
-
-        }
-    }
-
     formatPrice(number) {
         return number.toLocaleString("en-US", { style: 'currency', currency: 'USD', maximumSignificantDigits: 6 })
 
@@ -25,9 +17,9 @@ class CoinTable extends Component {
     }
     percChange(percent) {
         if (Math.sign(percent) === 1 || Math.sign(percent) === 0) {
-            return <td className='positiveValue col-auto'>{percent.toFixed(2)} &#37;</td>
+            return <td className='positiveValue col-auto text-center'>{percent.toFixed(2)} &#37;</td>
         } else {
-            return <td className='negativeValue col-auto'>{percent.toFixed(2)} &#37;</td>
+            return <td className='negativeValue col-auto text-center'>{percent.toFixed(2)} &#37;</td>
         }
     }
     render() {
