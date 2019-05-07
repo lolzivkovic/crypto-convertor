@@ -26,7 +26,6 @@ class CoinModal extends Component {
         const websites = website.filter(e => e !== '').map((e, i) => {
             return <p key={i}><a href={e}>{e.replace(re, '').split('/')[0]}</a></p>
         })
-        console.log(website)
         return websites
     }
     formatDate(date) {

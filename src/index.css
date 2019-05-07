@@ -22,7 +22,14 @@ body {
   background:rgba(0,0,0,0.1);
   cursor:pointer;
   }
-  
+  /* -----------GLOBAL STATS STYLING--------- */
+  .globalStats{
+    padding: .5rem;
+  }
+  .globalValues {
+    font-weight: 500;
+  }
+  /* --------------MODAL STYLING------------- */
   .modal {
   background:rgba(0,0,0,0.6);
   height:100%;
