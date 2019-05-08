@@ -26,9 +26,6 @@ body {
   .globalStats{
     padding: .5rem;
   }
-  .globalValues {
-    font-weight: 500;
-  }
   /* --------------MODAL STYLING------------- */
   .modal {
   background:rgba(0,0,0,0.6);

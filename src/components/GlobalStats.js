@@ -41,10 +41,10 @@ export class GlobalStats extends Component {
 
         return (
             <div className='row globalCrypto'>
-                <span className='globalStats col-12 col-sm-6 col-md-3'>Cryptocurrencies: <span className='globalValues'>{activeCrypto}</span></span>
-                <span className='globalStats col-12 col-sm-6 col-md-3'>Market Cap: <span className='globalValues'>{this.formatCap(totalMarketCap)}</span></span>
-                <span className='globalStats col-12 col-sm-6 col-md-3'>Total Volume: <span className='globalValues'>{this.formatCap(totalVolume)}</span></span>
-                <span className='globalStats col-12 col-sm-6 col-md-3'>Bitcoin Dominance: <span className='globalValues'>{this.formatPerc(btcDominance)}</span></span>
+                <span className='globalStats col-12 col-sm-6 col-md-3'>Cryptocurrencies: <strong>{activeCrypto}</strong></span>
+                <span className='globalStats col-12 col-sm-6 col-md-3'>Market Cap: <strong>{this.formatCap(totalMarketCap)}</strong></span>
+                <span className='globalStats col-12 col-sm-6 col-md-3'>Total Volume: <strong>{this.formatCap(totalVolume)}</strong></span>
+                <span className='globalStats col-12 col-sm-6 col-md-3'>Bitcoin Dominance: <strong>{this.formatPerc(btcDominance)}</strong></span>
             </div>
         )
     }
